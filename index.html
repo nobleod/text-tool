@@ -16,7 +16,8 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, #1f1c2c, #928dab);
+      /* Darker background */
+      background: linear-gradient(135deg, #101014, #23232a);
       font-family: 'Inter', sans-serif;
       color: #f8fafc;
       position: relative;
@@ -42,9 +43,9 @@
       height: 160px;
       padding: 1rem;
       font-size: 1.1rem;
-      background-color: #2c2c38;
+      background-color: #191924;
       color: #f1f5f9;
-      border: 1px solid #444457;
+      border: 1px solid #28283a;
       border-radius: 12px;
       resize: none;
       margin-bottom: 1.5rem;
@@ -53,7 +54,7 @@
       z-index: 1;
     }
     textarea:focus {
-      background-color: #353545;
+      background-color: #222233;
       outline: none;
       box-shadow: 0 0 10px #ffffff33;
     }
@@ -65,7 +66,7 @@
       z-index: 1;
     }
     button {
-      background-color: #444457;
+      background-color: #28283a;
       color: #f1f5f9;
       padding: 0.75rem 1.5rem;
       border: none;
@@ -78,7 +79,7 @@
       position: relative;
     }
     button:hover {
-      background-color: #6b6bbd;
+      background-color: #35354a;
       color: #ffffff;
       transform: translateY(-2px);
     }
@@ -110,11 +111,11 @@
     <button onclick="toLowerCase()">lower case</button>
     <button onclick="toUpperCase()">UPPER CASE</button>
     <button onclick="toCapitalizedCase()">Capitalized Case</button>
+    <button onclick="insertDate()">Date</button>
     <button onclick="copyToClipboard(this)">
       Copy
       <span class="copied-feedback">Copied!</span>
     </button>
-    <button onclick="insertDate()">Date</button>
   </div>
 
   <script>
@@ -152,14 +153,18 @@
       setTimeout(() => feedback.classList.remove('show-feedback'), 1000);
     }
 
-    // New Date button function
+    // Date button function: prepend date and dash if not already present.
     function insertDate() {
       const textArea = document.getElementById('textBox');
       const today = new Date();
       const day = String(today.getDate()).padStart(2, '0');
       const month = String(today.getMonth() + 1).padStart(2, '0');
       const year = today.getFullYear();
-      textArea.value = `${day}-${month}-${year}`;
+      const dateString = `${day}-${month}-${year}-`;
+      // If the text already starts with today's date and a dash, don't duplicate
+      if (!textArea.value.startsWith(dateString)) {
+        textArea.value = dateString + textArea.value;
+      }
     }
 
     // Particle background
@@ -184,7 +189,7 @@
 
     function animateParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#ffffff44';
+      ctx.fillStyle = '#ffffff22';
       particlesArray.forEach(p => {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
