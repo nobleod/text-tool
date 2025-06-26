@@ -114,6 +114,7 @@
       Copy
       <span class="copied-feedback">Copied!</span>
     </button>
+    <button onclick="insertDate()">Date</button>
   </div>
 
   <script>
@@ -149,6 +150,16 @@
       const feedback = btn.querySelector('.copied-feedback');
       feedback.classList.add('show-feedback');
       setTimeout(() => feedback.classList.remove('show-feedback'), 1000);
+    }
+
+    // New Date button function
+    function insertDate() {
+      const textArea = document.getElementById('textBox');
+      const today = new Date();
+      const day = String(today.getDate()).padStart(2, '0');
+      const month = String(today.getMonth() + 1).padStart(2, '0');
+      const year = today.getFullYear();
+      textArea.value = `${day}-${month}-${year}`;
     }
 
     // Particle background
